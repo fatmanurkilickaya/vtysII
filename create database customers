@@ -1,0 +1,30 @@
+CREATE DATABASE PERSON
+
+use PERSON;
+create table CUSTOMERS(
+ID int Primary Key not null identity(1,1),
+NAMESURNAME nvarchar(100),
+TCNUMBER int,
+GENDER nchar(10),
+EMAIL nvarchar(200),
+BIRTHDATE nvarchar(200),
+CITYID int  CONSTRAINT FK_customers_city 
+FOREIGN KEY (ID) REFERENCES CITIES(ID),
+DISTRICTID int CONSTRAINT FK_customers_districts 
+FOREIGN KEY (ID) REFERENCES DISTRICTS(ID),
+TELNR1 int,
+TELNR2 int
+);
+
+use PERSON;
+CREATE TABLE CITIES(
+ID int Primary Key not null identity(1,1),
+CITY nvarchar(200)
+);
+use PERSON;
+CREATE TABLE DISTRICTS(
+ID int Primary Key not null identity(1,1),
+CITYID int  CONSTRAINT FK_dis_city 
+FOREIGN KEY (ID) REFERENCES CITIES(ID),
+DISTRICT nvarchar(100)
+);
