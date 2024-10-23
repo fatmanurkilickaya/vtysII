@@ -1,30 +1,34 @@
-CREATE DATABASE PERSON
+CREATE DATABASE NEWPERSON // bir kez çalıştırılır
 
-use PERSON;
+use NEWPERSON;
+CREATE TABLE CITIES(
+CITY_ID int Primary Key not null identity(1,1),
+CITY nvarchar(200)
+);
+
+
+use NEWPERSON;
+CREATE TABLE DISTRICTS(
+DISTRICT_ID int Primary Key not null identity(1,1),
+CITYID int  CONSTRAINT FK_dis_city 
+FOREIGN KEY (CITYID) REFERENCES CITIES(CITY_ID),
+DISTRICT nvarchar(100)
+);
+
+use NEWPERSON;
 create table CUSTOMERS(
 ID int Primary Key not null identity(1,1),
 NAMESURNAME nvarchar(100),
-TCNUMBER int,
+TCNUMBER nvarchar(200),
 GENDER nchar(10),
 EMAIL nvarchar(200),
 BIRTHDATE nvarchar(200),
 CITYID int  CONSTRAINT FK_customers_city 
-FOREIGN KEY (ID) REFERENCES CITIES(ID),
+FOREIGN KEY (CITYID) REFERENCES CITIES(CITY_ID),
 DISTRICTID int CONSTRAINT FK_customers_districts 
-FOREIGN KEY (ID) REFERENCES DISTRICTS(ID),
-TELNR1 int,
-TELNR2 int
+FOREIGN KEY (DISTRICTID) REFERENCES DISTRICTS(DISTRICT_ID),
+TELNR1 nvarchar(200),
+TELNR2 nvarchar(200)
 );
 
-use PERSON;
-CREATE TABLE CITIES(
-ID int Primary Key not null identity(1,1),
-CITY nvarchar(200)
-);
-use PERSON;
-CREATE TABLE DISTRICTS(
-ID int Primary Key not null identity(1,1),
-CITYID int  CONSTRAINT FK_dis_city 
-FOREIGN KEY (ID) REFERENCES CITIES(ID),
-DISTRICT nvarchar(100)
-);
+
