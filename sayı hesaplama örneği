@@ -1,0 +1,19 @@
+declare @x int;
+set @x = 6;
+if @x < 2
+select @x
+else if @x >=3 and @x <=7
+begin
+declare @kare int;
+set @kare = @x *@x
+select @kare
+end
+else if @x >= 8 and @x <=10
+begin 
+declare @kup int;
+set @kup = @x* @x* @x;
+select @kup
+end
+else
+select @x* 2
+
