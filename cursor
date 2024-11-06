@@ -15,23 +15,22 @@ end
 
 select * from ogrenciler
 
-declare @ogrNo int, 
-@ogrAdi nvarchar(100), @ogrSoyadi nvarchar(100);
+declare @ogrNo int, @ogrAdi nvarchar(100)
 declare OgrenciCursor Cursor 
-for select * from ogrenciler
-open OgrenciCursor;
-FETCH next from OgrenciCursor into @ogrNo, @OgrAdi
-while @@FETCH_STATUS=0
+For Select ogrNo, ogrAdi from ogrenciBilgisi
+open OgrenciCursor
+fetch next from OgrenciCursor Into @ogrNo, @ogrAdi
+while (@@FETCH_STATUS = 0)
 begin
-declare @ogrSoyadi  nvarchar(100)
-select ogrSoyadi = @ogrSoyadi 
-from ogrenciler 
-where ogrNO = @ogrNo
-if @ogrNo % 2 = 0
-select @ogrAdi + '-' + @ogrSoyadi from ogrenciler
-else 
-select @ogrAdi + '_ _' + @ogrSoyadi
-
+	declare @ogrSoyadi nvarchar(100)
+	select @ogrSoyadi = ogrSoyadi from ogrenciBilgisi 
+	where ogrNo = @ogrNo
+	if @ogrNo % 2 = 0
+		set @ogrAdi = @ogrAdi + '-'+ @ogrSoyadi
+	else
+		set @ogrAdi = @ogrAdi + '--'+ @ogrSoyadi
+	print @ogrAdi
+fetch next from OgrenciCursor Into @ogrNo, @ogrAdi
 end
 close OgrenciCursor
-deallocate OgrenciCursor
+DEALLOCATE OgrenciCursor
