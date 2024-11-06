@@ -1,0 +1,22 @@
+// sayı örneği
+declare @i int;
+set @i = 18;
+if @i<2
+select @i
+else if @i >= 3 and @i <=7
+begin
+declare @kare int;
+set @kare = @i * @i
+select @kare;
+end
+else if @i >= 8 and @i <=10
+begin
+declare @kup int;
+set @kup = @i * @i * @i
+select @kup
+end
+else 
+begin
+set @i = @i * 2
+select @i
+end
