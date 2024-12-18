@@ -1,0 +1,9 @@
+set statistics time on
+
+select * from CUSTOMERS c
+join CITIES ci on ci.CITY_ID = c.CITYID
+join DISTRICTS d on d.DISTRICT_ID = c.DISTRICTID
+where   c.BIRTHDATE between '1990-01-01' and  '1995-01-01'
+
+
+set statistics time off
