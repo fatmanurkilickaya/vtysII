@@ -1,0 +1,25 @@
+CREATE FUNCTION FN_ASAL_SAYI_KONTROL
+(
+	@sayi int
+)RETURNS VARCHAR(100)
+BEGIN
+Declare @rakam int =1, @sayac int =0, @sonuc nvarchar(100)
+
+while(@sayi >=@rakam)
+begin
+	if(@sayi % @rakam = 0)
+	begin set @sayac += 1 end
+	set @rakam += 1
+end;
+set @sonuc = CONVERT(nvarchar,@sayi)
+if(@sayac >2 )
+begin set @sonuc = @sonuc+' Asal sayı değildir' end
+else begin set @sonuc = @sonuc + 'Asal sayı' end
+
+return @sonuc;
+
+END;
+
+select dbo.FN_ASAL_SAYI_KONTROL(7);
+select dbo.FN_ASAL_SAYI_KONTROL(58);
+select dbo.FN_ASAL_SAYI_KONTROL(101);
