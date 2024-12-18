@@ -1,0 +1,22 @@
+create function asal_sayi_kontrol(@sayi int)
+returns varchar(100)
+begin
+declare @sayac int =0, @rakam int =1, @sonuc nvarchar(100);
+while(@sayi >= @rakam)
+begin
+	if(@sayi % @rakam = 0)
+	begin set @sayac +=1; end
+	set @rakam +=1;
+end
+set @sonuc=Convert(varchar,@sayi)
+if(@sayac > 2)
+begin set @sonuc = @sonuc + 'Asal degil' end
+else begin set @sonuc = @sonuc +'asal' end
+return @sonuc;
+end;
+
+select dbo.asal_sayi_kontrol(7)
+
+select dbo.asal_sayi_kontrol(70)
+
+select dbo.asal_sayi_kontrol(4)
