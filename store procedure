@@ -1,0 +1,12 @@
+
+
+create procedure SP_GetpersonelList 
+as 
+begin
+select TELNR1 from CUSTOMERS
+join CITIES on CUSTOMERS.CITYID = CITIES.CITY_ID
+where CITIES.CITY  = 'Kayseri' 
+group by TELNR1;
+end
+
+exec SP_GetpersonelList
